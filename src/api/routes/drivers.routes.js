@@ -6,7 +6,7 @@ const router = express.Router();
 
 router.get("/", async (req, res, next) => {
   try {
-    const allDrivers = await Driver.find().populate('drivers');
+    const allDrivers = await Driver.find().populate('teams');
     return res.status(200).json(allDrivers);
   } catch (error) {
     return next(error);
