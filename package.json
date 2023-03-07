@@ -7,7 +7,8 @@
     "test": "echo \"Error: no test specified\" && exit 1",
     "start": "node index.js",
     "dev": "nodemon index.js",
-    "team": "node ./src/utils/seeds/teams.seed.js"
+    "team": "node ./src/utils/seeds/teams.seed.js",
+    "driver": "node ./src/utils/seeds/drivers.seed.js"
   },
   "keywords": [],
   "author": "",

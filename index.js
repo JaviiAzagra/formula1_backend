@@ -11,6 +11,7 @@ const server = express();
 
 const indexRoutes = require("./src/api/routes/index.routes");
 const teamRoutes = require("./src/api/routes/teams.routes");
+const driverRoutes = require("./src/api/routes/drivers.routes");
 
 const DB_URL = process.env.DB_URL;
 const PORT = process.env.PORT;
@@ -37,6 +38,7 @@ server.use(express.urlencoded({ extended: false }));
 
 server.use("/", indexRoutes);
 server.use("/teams", teamRoutes);
+server.use("/drivers", driverRoutes);
 
 server.use("*", (req, res) => {
   const error = new Error('PATH NOT FOUND! 404');

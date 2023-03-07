@@ -6,7 +6,7 @@ const router = express.Router();
 
 router.get("/", async (req, res, next) => {
   try {
-    const allDrivers = await Driver.find().populate('teams');
+    const allDrivers = await Driver.find().populate('drivers');
     return res.status(200).json(allDrivers);
   } catch (error) {
     return next(error);
@@ -64,21 +64,19 @@ router.delete("/delete/:id", async (req, res, next) => {
   }
 });
 
-router.put("/edit/", [isAuth], uploadFile.single("img"), async (req, res, next) => {
-  const userID = req.user._id;
+router.put("/edit/:id", uploadFile.single("img"), async (req, res, next) => {
   try {
-    const driverDb = await Driver.find({user: userID});
-    const id = driverDb[0]._id;
-    if (req.file && driverDb[0].img) {
-      deleteFile(driverDb[0].img);
+    const id = req.params.id;
+    const driverDb = await Driver.findById(id);
+    if (driverDb.img) {
+      deleteFile(driverDb.img);
     }
     const driver = req.body;
     if (req.file) {
       driver.img = req.file.path;
-    } else (driver.img = driverDb[0].img)
+    }
     const driverModify = new Driver(driver);
     driverModify._id = id;
-    driverModify.user = userID;
     const driverUpdated = await Driver.findByIdAndUpdate(id, driverModify);
     return res.status(200).json(`Successfully updated --> ${driverUpdated}`);
   } catch (error) {
