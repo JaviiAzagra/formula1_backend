@@ -14,9 +14,9 @@ const teamsSchema = new Schema(
     entry: { type: String, required: true },
     drivers:  [{type: mongoose.Types.ObjectId, ref: "drivers"}],
     img: { type: String },
-    img_two: { type: String },
-    img_three: { type: String },
-    img_four: { type: String },
+    imgtwo: { type: String },
+    imgthree: { type: String },
+    imgfour: { type: String },
   },
   {
     timestamps: true,
