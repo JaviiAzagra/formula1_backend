@@ -6,7 +6,7 @@ const router = express.Router();
 
 router.get("/", async (req, res, next) => {
   try {
-    const allTeams = await Team.find().populate('drivers');
+    const allTeams = await Team.find();
     return res.status(200).json(allTeams);
   } catch (error) {
     return next(error);
@@ -34,7 +34,7 @@ router.get("/:id", async (req, res, next) => {
   }
 });
 
-router.post("/create", [isAuth],uploadFile.single("img"), async (req, res, next) => {
+router.post("/create", uploadFile.single("img"), async (req, res, next) => {
   const userID = req.user._id;
   try {
     const team = req.body;
